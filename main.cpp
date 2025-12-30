@@ -16,9 +16,9 @@ int main() {
     b.printBoard();
 
     bool check = true;
-    bool turn = true;
+    bool turn = false;
 
-    std::cout << "Enter Your Start then End Coordinates for a move in format row col" << std::endl;
+    std::cout << "Enter Your Start then End Coordinates for a move in format row col, type: 8 8 to end game" << std::endl;
     std::cout << "Start: ";
     std::pair<int, int> start = getPosition();
 
@@ -26,24 +26,13 @@ int main() {
 
     std::pair<int , int> end = getPosition();
 
-    if(start == std::pair<int, int>{8, 8} || end == std::pair<int, int>{8, 8}){
-        check = false;
-    }
-
-    if (b.board[start.first][start.second]->getTeam() != White){
-        std::cout << "White Goes first ";
-        turn = false;
-    }
-    else{
-        b.board[start.first][start.second]->move(start, end, b);
-    }
     // turn false - White -- Turn true - Black
     while(check){
         if(!turn){
             if(b.board[start.first][start.second]->getTeam() == White){
-                std::string str = b.board[end.first][end.second]->nameW;
+                std::string temp = b.board[end.first][end.second]->nameW;
                 if(b.board[start.first][start.second]->move(start, end, b)){
-                    if(str == "♔"){
+                    if(temp == "♔"){
                         std::cout << "Game Over";
                         break;
                     }
@@ -56,7 +45,12 @@ int main() {
         }
         else{
             if(b.board[start.first][start.second]->getTeam() == Black){
-                if(b.board[start.first][start.second]->move(start, end, b)){;
+                std::string temp = b.board[end.first][end.second]->nameW;
+                if(b.board[start.first][start.second]->move(start, end, b)){
+                    if(temp == "♔"){
+                        std::cout << "Game Over";
+                        break;
+                    }
                     turn = !turn;
                 }
             }
