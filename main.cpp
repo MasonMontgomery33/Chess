@@ -34,7 +34,10 @@ int main() {
         std::cout << "White Goes first ";
         turn = false;
     }
-    // turn false - White -- Turn true - Red
+    else{
+        b.board[start.first][start.second]->move(start, end, b);
+    }
+    // turn false - White -- Turn true - Black
     while(check){
         if(!turn){
             if(b.board[start.first][start.second]->getTeam() == White){
