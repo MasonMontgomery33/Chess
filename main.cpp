@@ -28,37 +28,41 @@ int main() {
 
     // turn false - White -- Turn true - Black
     while(check){
-        if(!turn){
-            if(b.board[start.first][start.second]->getTeam() == White){
-                std::string temp = b.board[end.first][end.second]->nameW;
-                if(b.board[start.first][start.second]->move(start, end, b)){
-                    if(temp == "♔"){
-                        std::cout << "Game Over";
-                        break;
+        if(start.first <= 8 && start.second <=8 && start.first >= 0 && start.second >= 0 && end.first >= 0 && end.second >=0 && end.first <=8 && end.second <=8){
+            if(!turn){
+                if(b.board[start.first][start.second]->getTeam() == White){
+                    std::string temp = b.board[end.first][end.second]->nameW;
+                    if(b.board[start.first][start.second]->move(start, end, b)){
+                        if(temp == "♔"){
+                            std::cout << "Game Over";
+                            break;
+                        }
+                        turn = !turn;
                     }
-                    turn = !turn;
+                }
+                else{
+                    std::cout << "Not Your Turn" << std::endl;
                 }
             }
             else{
-                std::cout << "Not Your Turn" << std::endl;
+                if(b.board[start.first][start.second]->getTeam() == Black){
+                    std::string temp = b.board[end.first][end.second]->nameW;
+                    if(b.board[start.first][start.second]->move(start, end, b)){
+                        if(temp == "♔"){
+                            std::cout << "Game Over";
+                            break;
+                        }
+                        turn = !turn;
+                    }
+                }
+                else{
+                    std::cout << "Not Your Turn"  << std::endl;
+                }
             }
         }
         else{
-            if(b.board[start.first][start.second]->getTeam() == Black){
-                std::string temp = b.board[end.first][end.second]->nameW;
-                if(b.board[start.first][start.second]->move(start, end, b)){
-                    if(temp == "♔"){
-                        std::cout << "Game Over";
-                        break;
-                    }
-                    turn = !turn;
-                }
-            }
-            else{
-                std::cout << "Not Your Turn"  << std::endl;
-            }
+            std::cout << "Out of Bounds" << std::endl;
         }
-
         b.printBoard();
 
         std::cout << "Start: ";
